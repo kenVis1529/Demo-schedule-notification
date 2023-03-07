@@ -1,13 +1,28 @@
+import 'dart:developer';
+
 import 'package:demo_scheduled_notification/homepage.dart';
 import 'package:demo_scheduled_notification/services/notifi_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 // ignore: depend_on_referenced_packages
 import 'package:timezone/data/latest.dart' as tz;
+// ignore: depend_on_referenced_packages
+import 'package:timezone/timezone.dart' as tz;
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  /// Initialize notification
   NotificationService().initNotification();
+
+  /// Initialize timezone
   tz.initializeTimeZones();
+
+  /// Set local location
+  final String localTimezone = await FlutterNativeTimezone.getLocalTimezone();
+  log(localTimezone);
+  var location = tz.getLocation(localTimezone);
+  tz.setLocalLocation(location);
   runApp(const MyApp());
 }
 

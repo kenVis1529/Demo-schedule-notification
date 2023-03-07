@@ -64,7 +64,7 @@ class ScheduleBtn extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         debugPrint("Notification scheduled for $scheduleTime");
-        NotificationService().scheduleNotification(
+        NotificationService().scheduleDailyNotification(
           title: "Scheduled Notification",
           body: "$scheduleTime",
           scheduledNotificationDateTime: scheduleTime,
